@@ -1,12 +1,12 @@
 <?php
 
-namespace Tochka\JsonRpc\Exceptions;
+namespace Nbz4live\JsonRpc\Server\Exceptions;
 
 use Illuminate\Contracts\Debug\ExceptionHandler;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Log;
 use Symfony\Component\HttpKernel\Exception\HttpException;
-use Tochka\JsonRpc\JsonRpcRequest;
+use Nbz4live\JsonRpc\Server\JsonRpcRequest;
 
 class JsonRpcHandler
 {

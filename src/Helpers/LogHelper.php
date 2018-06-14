@@ -1,9 +1,9 @@
 <?php
 
-namespace Tochka\JsonRpc\Helpers;
+namespace Nbz4live\JsonRpc\Server\Helpers;
 
 use Illuminate\Support\Facades\Log;
-use Tochka\JsonRpc\JsonRpcRequest;
+use Nbz4live\JsonRpc\Server\JsonRpcRequest;
 
 /**
  * Class LogHelper

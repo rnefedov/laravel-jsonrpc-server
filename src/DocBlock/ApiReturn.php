@@ -1,6 +1,6 @@
 <?php
 
-namespace Tochka\JsonRpc\DocBlock;
+namespace Nbz4live\JsonRpc\Server\DocBlock;
 
 use phpDocumentor\Reflection\DocBlock\Description;
 use phpDocumentor\Reflection\DocBlock\DescriptionFactory;
@@ -9,7 +9,7 @@ use phpDocumentor\Reflection\DocBlock\Tags\Factory\StaticMethod;
 use phpDocumentor\Reflection\Type;
 use phpDocumentor\Reflection\TypeResolver;
 use phpDocumentor\Reflection\Types\Context as TypeContext;
-use Tochka\JsonRpc\DocBlock\TypeResolver as CustomTypeResolver;
+use Nbz4live\JsonRpc\Server\DocBlock\TypeResolver as CustomTypeResolver;
 use Webmozart\Assert\Assert;
 
 /**

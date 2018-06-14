@@ -1,10 +1,10 @@
 <?php
 
-namespace Tochka\JsonRpc\Middleware;
+namespace Nbz4live\JsonRpc\Server\Middleware;
 
 use Illuminate\Support\Facades\Request;
-use Tochka\JsonRpc\Exceptions\JsonRpcException;
-use Tochka\JsonRpc\JsonRpcRequest;
+use Nbz4live\JsonRpc\Server\Exceptions\JsonRpcException;
+use Nbz4live\JsonRpc\Server\JsonRpcRequest;
 
 class ServiceValidationMiddleware implements BaseMiddleware
 {

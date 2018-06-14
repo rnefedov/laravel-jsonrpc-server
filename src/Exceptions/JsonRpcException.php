@@ -1,6 +1,6 @@
 <?php
 
-namespace Tochka\JsonRpc\Exceptions;
+namespace Nbz4live\JsonRpc\Server\Exceptions;
 
 use Exception;
 

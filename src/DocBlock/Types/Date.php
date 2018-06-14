@@ -1,12 +1,12 @@
 <?php
 
-namespace Tochka\JsonRpc\DocBlock\Types;
+namespace Nbz4live\JsonRpc\Server\DocBlock\Types;
 
 use phpDocumentor\Reflection\Type;
 
 /**
  * Class Date
- * @package Tochka\JsonRpc\DocBlock\Types
+ * @package Nbz4live\JsonRpc\Server\DocBlock\Types
  */
 class Date implements Type
 {

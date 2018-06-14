@@ -1,9 +1,9 @@
 <?php
 
-namespace Tochka\JsonRpc\Middleware;
+namespace Nbz4live\JsonRpc\Server\Middleware;
 
-use Tochka\JsonRpc\Exceptions\JsonRpcException;
-use Tochka\JsonRpc\JsonRpcRequest;
+use Nbz4live\JsonRpc\Server\Exceptions\JsonRpcException;
+use Nbz4live\JsonRpc\Server\JsonRpcRequest;
 
 class MethodClosureMiddleware implements BaseMiddleware
 {

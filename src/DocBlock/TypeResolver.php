@@ -1,6 +1,6 @@
 <?php
 
-namespace Tochka\JsonRpc\DocBlock;
+namespace Nbz4live\JsonRpc\Server\DocBlock;
 
 use phpDocumentor\Reflection\Types\Array_;
 use phpDocumentor\Reflection\Types\Boolean;
@@ -8,9 +8,9 @@ use phpDocumentor\Reflection\Types\Float_;
 use phpDocumentor\Reflection\Types\Integer;
 use phpDocumentor\Reflection\Types\Mixed_;
 use phpDocumentor\Reflection\Types\String_;
-use Tochka\JsonRpc\DocBlock\Types\Date;
-use Tochka\JsonRpc\DocBlock\Types\Enum;
-use Tochka\JsonRpc\DocBlock\Types\Object_;
+use Nbz4live\JsonRpc\Server\DocBlock\Types\Date;
+use Nbz4live\JsonRpc\Server\DocBlock\Types\Enum;
+use Nbz4live\JsonRpc\Server\DocBlock\Types\Object_;
 
 class TypeResolver
 {

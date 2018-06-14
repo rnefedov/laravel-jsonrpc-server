@@ -1,6 +1,6 @@
 <?php
 
-namespace Tochka\JsonRpc\Helpers;
+namespace Nbz4live\JsonRpc\Server\Helpers;
 
 /**
  * Хелпер работы с массивами

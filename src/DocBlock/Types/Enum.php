@@ -1,13 +1,13 @@
 <?php
 
-namespace Tochka\JsonRpc\DocBlock\Types;
+namespace Nbz4live\JsonRpc\Server\DocBlock\Types;
 
-use Tochka\JsonRpc\DocBlock\VariableValueTrait;
+use Nbz4live\JsonRpc\Server\DocBlock\VariableValueTrait;
 use phpDocumentor\Reflection\Type;
 
 /**
  * Class Enum
- * @package Tochka\JsonRpc\DocBlock\Types
+ * @package Nbz4live\JsonRpc\Server\DocBlock\Types
  */
 class Enum implements Type
 {

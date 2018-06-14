@@ -1,6 +1,6 @@
 <?php
 
-namespace Tochka\JsonRpc\DocBlock;
+namespace Nbz4live\JsonRpc\Server\DocBlock;
 
 trait VariableValueTrait
 {

@@ -1,9 +1,9 @@
 <?php
 
-namespace Tochka\JsonRpc\Facades;
+namespace Nbz4live\JsonRpc\Server\Facades;
 
 use Illuminate\Support\Facades\Facade;
-use Tochka\JsonRpc\Exceptions\JsonRpcHandler as Handler;
+use Nbz4live\JsonRpc\Server\Exceptions\JsonRpcHandler as Handler;
 
 /**
  * JsonRpcHandler Facade

@@ -1,24 +1,24 @@
 <?php
 
-namespace Tochka\JsonRpc;
+namespace Nbz4live\JsonRpc\Server;
 
 use phpDocumentor\Reflection\DocBlock;
 use phpDocumentor\Reflection\DocBlockFactory;
 use phpDocumentor\Reflection\Type;
 use phpDocumentor\Reflection\Types\Array_;
-use Tochka\JsonRpc\DocBlock\ApiEnum;
-use Tochka\JsonRpc\DocBlock\ApiObject;
-use Tochka\JsonRpc\DocBlock\ApiParam;
-use Tochka\JsonRpc\DocBlock\ApiReturn;
-use Tochka\JsonRpc\DocBlock\Types\Date;
-use Tochka\JsonRpc\DocBlock\Types\Enum;
-use Tochka\JsonRpc\DocBlock\Types\Object_;
-use Tochka\JsonRpc\Middleware\AccessControlListMiddleware;
-use Tochka\JsonRpc\Middleware\AssociateParamsMiddleware;
+use Nbz4live\JsonRpc\Server\DocBlock\ApiEnum;
+use Nbz4live\JsonRpc\Server\DocBlock\ApiObject;
+use Nbz4live\JsonRpc\Server\DocBlock\ApiParam;
+use Nbz4live\JsonRpc\Server\DocBlock\ApiReturn;
+use Nbz4live\JsonRpc\Server\DocBlock\Types\Date;
+use Nbz4live\JsonRpc\Server\DocBlock\Types\Enum;
+use Nbz4live\JsonRpc\Server\DocBlock\Types\Object_;
+use Nbz4live\JsonRpc\Server\Middleware\AccessControlListMiddleware;
+use Nbz4live\JsonRpc\Server\Middleware\AssociateParamsMiddleware;
 
 /**
  * Генератор SMD-схемы для JsonRpc-сервера
- * @package Tochka\JsonRpc
+ * @package Nbz4live\JsonRpc\Server
  */
 class SmdGenerator
 {

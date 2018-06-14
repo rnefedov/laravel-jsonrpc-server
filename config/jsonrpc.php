@@ -34,11 +34,11 @@ return [
      * Обработчики запросов
      */
     'middleware' => [
-        \Tochka\JsonRpc\Middleware\ValidateJsonRpcMiddleware::class,     // валидация на стандарты JsonRPC
-        //\Tochka\JsonRpc\Middleware\ServiceValidationMiddleware::class,   // проверка возможности авторизации под указанным сервисом
-        //\Tochka\JsonRpc\Middleware\AccessControlListMiddleware::class,   // проверка доступа системы к методу
-        \Tochka\JsonRpc\Middleware\MethodClosureMiddleware::class,       // возвращает контроллер и метод !!REQUIRED!!
-        \Tochka\JsonRpc\Middleware\AssociateParamsMiddleware::class,     // ассоциативные параметры
+        \Nbz4live\JsonRpc\Server\Middleware\ValidateJsonRpcMiddleware::class,     // валидация на стандарты JsonRPC
+        //\Nbz4live\JsonRpc\Server\Middleware\ServiceValidationMiddleware::class,   // проверка возможности авторизации под указанным сервисом
+        //\Nbz4live\JsonRpc\Server\Middleware\AccessControlListMiddleware::class,   // проверка доступа системы к методу
+        \Nbz4live\JsonRpc\Server\Middleware\MethodClosureMiddleware::class,       // возвращает контроллер и метод !!REQUIRED!!
+        \Nbz4live\JsonRpc\Server\Middleware\AssociateParamsMiddleware::class,     // ассоциативные параметры
     ],
 
     /**

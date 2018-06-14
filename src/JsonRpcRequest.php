@@ -1,11 +1,11 @@
 <?php
 
-namespace Tochka\JsonRpc;
+namespace Nbz4live\JsonRpc\Server;
 
 use Illuminate\Support\Facades\Log;
-use Tochka\JsonRpc\Exceptions\JsonRpcException;
-use Tochka\JsonRpc\Helpers\ArrayHelper;
-use Tochka\JsonRpc\Middleware\BaseMiddleware;
+use Nbz4live\JsonRpc\Server\Exceptions\JsonRpcException;
+use Nbz4live\JsonRpc\Server\Helpers\ArrayHelper;
+use Nbz4live\JsonRpc\Server\Middleware\BaseMiddleware;
 
 class JsonRpcRequest
 {

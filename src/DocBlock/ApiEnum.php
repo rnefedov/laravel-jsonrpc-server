@@ -1,6 +1,6 @@
 <?php
 
-namespace Tochka\JsonRpc\DocBlock;
+namespace Nbz4live\JsonRpc\Server\DocBlock;
 
 use phpDocumentor\Reflection\DocBlock\Description;
 use phpDocumentor\Reflection\DocBlock\DescriptionFactory;

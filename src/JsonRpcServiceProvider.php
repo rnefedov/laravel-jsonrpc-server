@@ -1,12 +1,12 @@
 <?php
 
-namespace Tochka\JsonRpc;
+namespace Nbz4live\JsonRpc\Server;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
-use Tochka\JsonRpc\Facades\JsonRpcHandler;
-use \Tochka\JsonRpc\Exceptions\JsonRpcHandler as Handler;
+use Nbz4live\JsonRpc\Server\Facades\JsonRpcHandler;
+use \Nbz4live\JsonRpc\Server\Exceptions\JsonRpcHandler as Handler;
 
 class JsonRpcServiceProvider extends ServiceProvider
 {

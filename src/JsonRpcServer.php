@@ -1,16 +1,16 @@
 <?php
 
-namespace Tochka\JsonRpc;
+namespace Nbz4live\JsonRpc\Server;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
-use Tochka\JsonRpc\Exceptions\JsonRpcException;
-use Tochka\JsonRpc\Facades\JsonRpcHandler;
-use Tochka\JsonRpc\Middleware\MethodClosureMiddleware;
+use Nbz4live\JsonRpc\Server\Exceptions\JsonRpcException;
+use Nbz4live\JsonRpc\Server\Facades\JsonRpcHandler;
+use Nbz4live\JsonRpc\Server\Middleware\MethodClosureMiddleware;
 
 /**
  * Class JsonRpcServer
- * @package Tochka\JsonRpc
+ * @package Nbz4live\JsonRpc\Server
  */
 class JsonRpcServer
 {

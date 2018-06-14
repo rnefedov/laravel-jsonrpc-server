@@ -24,9 +24,9 @@ php artisan vendor:publish
 ```
 ### Lumen
 1. ``composer require tochka-developers/jsonrpc``
-2. Зарегистрируйте сервис-провайдер `Tochka\JsonRpc\JsonRpcServiceProvider` в `bootstrap/app.php`:
+2. Зарегистрируйте сервис-провайдер `Nbz4live\JsonRpc\Server\JsonRpcServiceProvider` в `bootstrap/app.php`:
 ```php
-$app->register(Tochka\JsonRpc\JsonRpcServiceProvider::class);
+$app->register(Nbz4live\JsonRpc\Server\JsonRpcServiceProvider::class);
 ```
 3. Скопируйте конфигурацию из пакета (`vendor/tochka-developers/jsonrpc/config/jsonrpc.php`) в проект (`config/jsonrpc.php`)
 4. Подключите конфигурацию в `bootstrap/app.php`:
@@ -43,13 +43,13 @@ $app->withFacades();
 Пропишите в вашем route.php:
 ### Laravel
 ```php
-Route::post('/api/v1/jsonrpc', function (Illuminate\Http\Request $request, \Tochka\JsonRpc\JsonRpcServer $server) {
+Route::post('/api/v1/jsonrpc', function (Illuminate\Http\Request $request, \Nbz4live\JsonRpc\Server\JsonRpcServer $server) {
     return $server->handle($request);
 });
 ```
 ### Lumen
 ```php
-$router->post('/api/v1/jsonrpc', function (Illuminate\Http\Request $request, \Tochka\JsonRpc\JsonRpcServer $server) {
+$router->post('/api/v1/jsonrpc', function (Illuminate\Http\Request $request, \Nbz4live\JsonRpc\Server\JsonRpcServer $server) {
     return $server->handle($request);
 });
 ```
@@ -57,13 +57,13 @@ $router->post('/api/v1/jsonrpc', function (Illuminate\Http\Request $request, \To
 Если планируется передавать имя контроллера в адресе, после точки входа, роутинги дожны быть следующего вида:
 ### Laravel
 ```php
-Route::post('/api/v1/jsonrpc/{endpoint}[/{action}]', function (Illuminate\Http\Request $request, \Tochka\JsonRpc\JsonRpcServer $server, $endpoint, $action = null) {
+Route::post('/api/v1/jsonrpc/{endpoint}[/{action}]', function (Illuminate\Http\Request $request, \Nbz4live\JsonRpc\Server\JsonRpcServer $server, $endpoint, $action = null) {
     return $server->handle($request, ['endpoint' => $endpoint, 'action' => $action]);
 });
 ```
 ### Lumen
 ```php
-$router->post('/api/v1/jsonrpc/{endpoint}[/{action}]', function (Illuminate\Http\Request $request, \Tochka\JsonRpc\JsonRpcServer $server, $endpoint, $action = null) {
+$router->post('/api/v1/jsonrpc/{endpoint}[/{action}]', function (Illuminate\Http\Request $request, \Nbz4live\JsonRpc\Server\JsonRpcServer $server, $endpoint, $action = null) {
     return $server->handle($request, ['endpoint' => $endpoint, 'action' => $action]);
 });
 ```
@@ -80,7 +80,7 @@ return $server->handle($request, $options);
 * `postfix` ('Controller') - суффикс контроллеров (для метода foo_bar будет выбран контроллер fooController). 
 Если не указано - берется значение `jsonrpc.controllerPostfix`
 * `middleware` (array) - список обработчиков запроса. 
-В списке обработчиков обязательно должен быть `\Tochka\JsonRpc\Middleware\MethodClosureMiddleware::class`, 
+В списке обработчиков обязательно должен быть `\Nbz4live\JsonRpc\Server\Middleware\MethodClosureMiddleware::class`, 
 данный обработчик отвечате за выбор контроллера и метода. 
 Если список не указан - берется значение `jsonrpc.middleware`
 * `description` ('JsonRpc server') - описание сервиса. Возвращается в SMD-схеме.
@@ -146,7 +146,7 @@ return $server->handle($request, $options);
 Передача параметров из запроса в метод на основе имен.
 
 Кроме того, вы можете использовать свои обработчики. 
-Для этого просто реализуйте интерфейс `\Tochka\JsonRpc\Middleware\BaseMiddleware` и укажите обработчик в списке.
+Для этого просто реализуйте интерфейс `\Nbz4live\JsonRpc\Server\Middleware\BaseMiddleware` и укажите обработчик в списке.
 
 ## Аутентификация
 Если включена аутентификация (`jqonrpc.authValidate`), то в каждом запросе должен присутствовать заголовок (указанный в `jsonrpc.accessHeaderName`).
@@ -186,7 +186,7 @@ return $server->handle($request, $options);
 `systemName1` и `systemName2`, и ко всем методам контроллера `App\Http\TestController2` - все клиенты.
 
 ## Валидация параметров
-Для валидации входных параметров внутри контроллера можно использовать готовый trait: `Tochka\JsonRpc\Traits\JsonRpcController`
+Для валидации входных параметров внутри контроллера можно использовать готовый trait: `Nbz4live\JsonRpc\Server\Traits\JsonRpcController`
 Подключив данный trait в своем контроллере вы сможете проверить данные с помощью средств валидации Laravel:
 ```php
 public function store($title, $body)

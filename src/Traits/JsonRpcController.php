@@ -1,13 +1,13 @@
 <?php
 
-namespace Tochka\JsonRpc\Traits;
+namespace Nbz4live\JsonRpc\Server\Traits;
 
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\MessageBag;
 use Illuminate\Support\Str;
-use Tochka\JsonRpc\Exceptions\RPC\InvalidParametersException;
-use Tochka\JsonRpc\Helpers\ArrayHelper;
-use Tochka\JsonRpc\JsonRpcRequest;
+use Nbz4live\JsonRpc\Server\Exceptions\RPC\InvalidParametersException;
+use Nbz4live\JsonRpc\Server\Helpers\ArrayHelper;
+use Nbz4live\JsonRpc\Server\JsonRpcRequest;
 
 trait JsonRpcController
 {
@@ -90,7 +90,7 @@ trait JsonRpcController
      * @param bool  $noException Если true - Exception генерироваться не будет
      *
      * @return array
-     * @throws \Tochka\JsonRpc\Exceptions\RPC\InvalidParametersException
+     * @throws \Nbz4live\JsonRpc\Server\Exceptions\RPC\InvalidParametersException
      */
     protected function validateAndFilter($rules, array $messages = [], $noException = false): array
     {

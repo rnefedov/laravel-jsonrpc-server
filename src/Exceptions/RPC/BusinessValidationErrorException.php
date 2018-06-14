@@ -1,8 +1,8 @@
 <?php
 
-namespace Tochka\JsonRpc\Exceptions\RPC;
+namespace Nbz4live\JsonRpc\Server\Exceptions\RPC;
 
-use Tochka\JsonRpc\Exceptions\JsonRpcException;
+use Nbz4live\JsonRpc\Server\Exceptions\JsonRpcException;
 
 /**
  * Class WebServiceException
