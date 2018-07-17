@@ -645,7 +645,13 @@ class SmdGenerator
 
         $namespace = trim($namespace, '\\');
 
-        $files = scandir($this->getNamespaceDirectory($namespace), SCANDIR_SORT_ASCENDING);
+        $directory = $this->getNamespaceDirectory($namespace);
+
+        if (!\is_dir($directory)) {
+            return [];
+        }
+
+        $files = scandir($directory, SCANDIR_SORT_ASCENDING);
 
         $classes = array_map(function ($file) use ($namespace) {
             return $namespace . '\\' . str_replace('.php', '', $file);
