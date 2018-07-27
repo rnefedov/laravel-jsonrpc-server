@@ -17,6 +17,14 @@ class JsonRpcServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
+        $this->mergeConfigFrom(
+            __DIR__.'/../config/jsonrpc.php', 'jsonrpc'
+        );
+
+        if (\is_lumen()) {
+            $this->app->configure('jsonrpc');
+        }
+
         // Необходимая вещь
         $this->app->instance(JsonRpcRequest::class, new JsonRpcRequest(new \StdClass, []));
 
