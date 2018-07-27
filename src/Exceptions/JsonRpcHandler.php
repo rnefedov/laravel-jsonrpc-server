@@ -7,29 +7,30 @@ use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Log;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Nbz4live\JsonRpc\Server\JsonRpcRequest;
+use Nbz4live\JsonRpc\Server\Exceptions\Transformers\HttpExceptionTransformer;
 
 class JsonRpcHandler
 {
     protected const EXCEPTION_MESSAGE = 'JsonRpc (method:"%s", id:"%s", service:"%s"): #%d %s';
 
-    public function handle(\Exception $e)
+    public function handle(\Exception $exception)
     {
         $error = new \StdClass();
 
-        if ($e instanceof HttpException) {
-            /** @var HttpException $statusCode */
-            $error->code = $e->getStatusCode();
-            $error->message = !empty($e->getMessage()) ? $e->getMessage() :
-                (!empty(Response::$statusTexts[$e->getStatusCode()]) ? Response::$statusTexts[$e->getStatusCode()] : 'Unknown error');
-        } elseif ($e instanceof JsonRpcException) {
-            $error->code = $e->getCode();
-            $error->message = $e->getMessage();
-            if (null !== $e->getData()) {
-                $error->data['errors'] = $e->getData();
+        $handler = app(ExceptionHandler::class);
+        $handler->report($exception);
+
+        $exception = $this->transform($exception);
+
+        if ($exception instanceof JsonRpcException) {
+            $error->code = $exception->getCode();
+            $error->message = $exception->getMessage();
+            if (null !== $exception->getData()) {
+                $error->data['errors'] = $exception->getData();
             }
         } else {
-            $error->code = $e->getCode();
-            $error->message = $e->getMessage();
+            $error->code = $exception->getCode();
+            $error->message = $exception->getMessage();
         }
 
         /** @var JsonRpcRequest $request */
@@ -49,9 +50,29 @@ class JsonRpcHandler
         Log::channel(config('jsonrpc.log.channel', 'default'))
             ->info('Error #' . $error->code . ': ' . $error->message, $logContext);
 
-        $handler = app(ExceptionHandler::class);
-        $handler->report($e);
-
         return $error;
+    }
+
+    protected function transform(\Exception $exception)
+    {
+        $exceptionTransformers = \config('jsonrpc.exceptionTransformers', [
+            HttpException::class => HttpExceptionTransformer::class,
+        ]);
+
+        $transformer = $transformers[\get_class($exception)] ?? null;
+
+        if (!$transformer) {
+            foreach ($exceptionTransformers as $exceptionClass => $transformerClass) {
+                if ($exception instanceof $exceptionClass) {
+                    $transformer = $transformerClass;
+                }
+            }
+        }
+
+        if (\is_callable($transformer.'::transform')) {
+            return $transformer::transform($exception) ?? $exception;
+        }
+
+        return $exception;
     }
 }
