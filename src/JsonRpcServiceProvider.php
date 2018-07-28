@@ -17,6 +17,14 @@ class JsonRpcServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
+        $this->mergeConfigFrom(
+            __DIR__.'/../config/jsonrpc.php', 'jsonrpc'
+        );
+
+        if (\is_lumen()) {
+            $this->app->configure('jsonrpc');
+        }
+
         // Необходимая вещь
         $this->app->instance(JsonRpcRequest::class, new JsonRpcRequest(new \StdClass, []));
 
@@ -63,29 +71,23 @@ class JsonRpcServiceProvider extends ServiceProvider
     protected function route($uri, array $options = []): void
     {
         if (is_lumen()) {
-            $this->app->router->post($uri,
-                function (Request $request, JsonRpcServer $server, $endpoint = null, $action = null) use ($options) {
-                    if (!empty($endpoint)) {
-                        $options['endpoint'] = $endpoint;
-                    }
-                    if (!empty($action)) {
-                        $options['action'] = $action;
-                    }
-
-                    return $server->handle($request, $options);
-                });
+            $this->app->router->post($uri, $this->getPostRouteClosure($options));
         } else {
-            Route::post($uri,
-                function (Request $request, JsonRpcServer $server, $endpoint = null, $action = null) use ($options) {
-                    if (!empty($endpoint)) {
-                        $options['endpoint'] = $endpoint;
-                    }
-                    if (!empty($action)) {
-                        $options['action'] = $action;
-                    }
-
-                    return $server->handle($request, $options);
-                });
+            Route::post($uri, $this->getPostRouteClosure($options));
         }
+    }
+
+    protected function getPostRouteClosure(array $options = []): \Closure
+    {
+        return function (Request $request, JsonRpcServer $server, $endpoint = null, $action = null) use ($options) {
+            if (!empty($endpoint)) {
+                $options['endpoint'] = $endpoint;
+            }
+            if (!empty($action)) {
+                $options['action'] = $action;
+            }
+
+            return $server->handle($request, $options);
+        };
     }
 }

@@ -1,8 +1,12 @@
 <?php
 
+use Symfony\Component\HttpKernel\Exception\HttpException;
+use Nbz4live\JsonRpc\Server\Exceptions\Transformers\HttpExceptionTransformer;
+
 /**
  * Настройки JsonRpc
  */
+
 return [
 
     /**
@@ -28,7 +32,7 @@ return [
     /**
      * Заголовок идентификации сервиса
      */
-    'accessHeaderName' => 'X-Tochka-Access-Key',
+    'accessHeaderName' => 'X-Access-Key',
 
     /**
      * Обработчики запросов
@@ -93,6 +97,16 @@ return [
      * ]
      */
     'routes' => [],
+
+    /**
+     * List of exception transformers.
+     * Exceptions from the array keys will be transformed by the classes in the values
+     * to replace them with an JsonRpcException.
+     * This way the real exception will be reported to the Laravel/Lumen Handler, but not to the API consumer.
+     */
+    'exceptionTransformers' => [
+        HttpException::class => HttpExceptionTransformer::class,
+    ],
 
     /**
      * Описание сервиса (для SMD-схемы)
