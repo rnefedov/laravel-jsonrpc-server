@@ -9,6 +9,7 @@ use Nbz4live\JsonRpc\Server\Middleware\BaseMiddleware;
 
 class JsonRpcRequest
 {
+
     public $call;
 
     public $id;
@@ -33,17 +34,15 @@ class JsonRpcRequest
      */
     public function handle()
     {
-        $middlewareList = $this->options['middleware'];
-
-        foreach ($middlewareList as $className) {
-            /** @var BaseMiddleware $middleware */
-            $middleware = new $className();
-            $middleware->handle($this);
-        }
+        $this->handleMiddleware($this->options['middleware']);
 
         if (empty($this->controller) || empty($this->method)) {
             throw new JsonRpcException(JsonRpcException::CODE_INTERNAL_ERROR);
         }
+
+        $this->handleMiddleware(
+            $this->controller->getMiddlewareForMethod($this->method)
+        );
 
         $logContext = [
             'method' => $this->call->method,
@@ -61,5 +60,13 @@ class JsonRpcRequest
             ->info('Successful request', $logContext);
 
         return $result;
+    }
+
+    private function handleMiddleware(array $middlewareList){
+        foreach ($middlewareList as $className) {
+            /** @var BaseMiddleware $middleware */
+            $middleware = app()->make($className);
+            $middleware->handle($this);
+        }
     }
 }
