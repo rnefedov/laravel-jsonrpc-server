@@ -59,12 +59,13 @@ class JsonRpcHandler
             HttpException::class => HttpExceptionTransformer::class,
         ]);
 
-        $transformer = $transformers[\get_class($exception)] ?? null;
+        $transformer = $exceptionTransformers[\get_class($exception)] ?? null;
 
         if (!$transformer) {
             foreach ($exceptionTransformers as $exceptionClass => $transformerClass) {
                 if ($exception instanceof $exceptionClass) {
                     $transformer = $transformerClass;
+                    break;
                 }
             }
         }
