@@ -2,6 +2,8 @@
 
 namespace Nbz4live\JsonRpc\Server\Testing\Concerns;
 
+use Nbz4live\JsonRpc\Server\Exceptions\JsonRpcException;
+
 trait MakesJsonRpcRequests
 {
     protected $uri;
@@ -71,5 +73,21 @@ trait MakesJsonRpcRequests
     public function setUri(string $uri): void
     {
         $this->uri = $uri;
+    }
+
+    /**
+     * Check that the response contains a validation error with only the specified keys.
+     *
+     * @param array $expectedErrors
+     */
+    protected function assertRpcValidationErrors(array $expectedErrors): void
+    {
+        $this->seeJsonRpcError(JsonRpcException::CODE_INVALID_PARAMETERS);
+
+        $json = json_decode($this->response->content(), true);
+        $this->assertEquals(
+            collect($expectedErrors)->sort()->values()->toArray(),
+            collect($json['error']['data']['errors'] ?? [])->pluck('code')->sort()->values()->toArray()
+        );
     }
 }
