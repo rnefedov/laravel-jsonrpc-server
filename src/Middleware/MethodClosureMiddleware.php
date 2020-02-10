@@ -2,6 +2,7 @@
 
 namespace Nbz4live\JsonRpc\Server\Middleware;
 
+use Illuminate\Support\Str;
 use Nbz4live\JsonRpc\Server\Exceptions\JsonRpcException;
 use Nbz4live\JsonRpc\Server\JsonRpcRequest;
 
@@ -22,7 +23,7 @@ class MethodClosureMiddleware implements BaseMiddleware
         $method = $request->call->method;
 
         if (!empty($request->call->endpoint) && !empty($request->call->action)) {
-            $namespace = $request->options['namespace'] . studly_case($request->call->endpoint) . '\\';
+            $namespace = $request->options['namespace'] . Str::studly($request->call->endpoint) . '\\';
             $controllerName = $request->call->action;
         } elseif (!empty($request->call->endpoint)) {
             $controllerName = $request->call->endpoint;
@@ -39,12 +40,12 @@ class MethodClosureMiddleware implements BaseMiddleware
             } else {
                 $controllerName = $methodArray[0];
                 unset($methodArray[0]);
-                $method = camel_case(implode('_', $methodArray));
+                $method = Str::camel(implode('_', $methodArray));
             }
 
         }
 
-        $controllerName = $namespace . studly_case($controllerName . $request->options['postfix']);
+        $controllerName = $namespace . Str::studly($controllerName . $request->options['postfix']);
 
         // если нет такого контроллера или метода
         if (!class_exists($controllerName)) {
