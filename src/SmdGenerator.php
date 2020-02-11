@@ -2,6 +2,7 @@
 
 namespace Nbz4live\JsonRpc\Server;
 
+use Illuminate\Support\Str;
 use phpDocumentor\Reflection\DocBlock;
 use phpDocumentor\Reflection\DocBlockFactory;
 use phpDocumentor\Reflection\Type;
@@ -110,7 +111,7 @@ class SmdGenerator
         $controllers = $this->getControllers();
 
         if (!empty($this->options['endpoint'])) {
-            $namespace = $this->options['namespace'] . studly_case($this->options['endpoint']) . '\\';
+            $namespace = $this->options['namespace'] . Str::studly($this->options['endpoint']) . '\\';
             $controllers = \array_merge($controllers, $this->getControllers($namespace));
         }
 
@@ -292,7 +293,7 @@ class SmdGenerator
      */
     protected function getShortNameForController($name)
     {
-        return camel_case(str_replace_last($this->options['postfix'], '', class_basename($name)));
+        return Str::camel(str_replace_last($this->options['postfix'], '', class_basename($name)));
     }
 
     /**
