@@ -293,7 +293,7 @@ class SmdGenerator
      */
     protected function getShortNameForController($name)
     {
-        return Str::camel(str_replace_last($this->options['postfix'], '', class_basename($name)));
+        return Str::camel(Str::replaceLast($this->options['postfix'], '', class_basename($name)));
     }
 
     /**
