@@ -58,7 +58,7 @@ class JsonRpcRequest
         $result = $this->controller->{$this->method}(...$this->params);
 
         Log::channel(config('jsonrpc.log.channel', 'default'))
-            ->info('Successful request', $logContext + ['time' => microtime(true) - $start]);
+            ->info('Successful request', $logContext + ['duration' => microtime(true) - $start]);
 
         return $result;
     }
