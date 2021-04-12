@@ -53,11 +53,12 @@ class JsonRpcRequest
 
         Log::channel(config('jsonrpc.log.channel', 'default'))
             ->info('New request', $logContext + ['request' => ArrayHelper::fromObject($this->call)]);
+        $start = microtime(true);
 
         $result = $this->controller->{$this->method}(...$this->params);
 
         Log::channel(config('jsonrpc.log.channel', 'default'))
-            ->info('Successful request', $logContext);
+            ->info('Successful request', $logContext + ['duration' => microtime(true) - $start]);
 
         return $result;
     }
