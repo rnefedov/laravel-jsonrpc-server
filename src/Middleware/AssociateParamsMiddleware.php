@@ -44,7 +44,7 @@ class AssociateParamsMiddleware implements BaseMiddleware
                 }
             } else {
                 // Проверяем тип
-                $parameterType = strtolower(class_basename((string)$parameter->getType()));
+                $parameterType = $parameter->getType()->getName();
                 switch ($parameterType) {
                     case 'int':
                     case 'integer':
