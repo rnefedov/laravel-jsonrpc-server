@@ -8,7 +8,7 @@ trait MakesJsonRpcRequests
 {
     protected $uri;
 
-    public function jsonRpc(string $method, array $params = null, string $uri = null): self
+    public function jsonRpc(string $method, array $params = null, string $uri = null, array $headers = []): self
     {
         $rpcCall = [
             'jsonrpc' => '2.0',
@@ -19,7 +19,7 @@ trait MakesJsonRpcRequests
             $rpcCall['params'] = $params;
         }
 
-        return $this->json('POST', $uri ?? $this->uri, $rpcCall);
+        return $this->json('POST', $uri ?? $this->uri, $rpcCall, $headers);
     }
 
     /**
